@@ -1,10 +1,10 @@
+using HotelHub.Application.Abstractions;
 using HotelHub.Domain.Entities;
-using HotelHub.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelHub.Infrastructure;
 
-public class HotelHubDbContext : DbContext
+public class HotelHubDbContext : DbContext, IApplicationDbContext
 {
     public HotelHubDbContext(DbContextOptions<HotelHubDbContext> options) : base(options) { }
 
