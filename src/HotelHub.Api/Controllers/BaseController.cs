@@ -18,11 +18,7 @@ public abstract class BaseController : ControllerBase
         if (result.IsSuccess)
             return Ok(result.Value);
 
-        return result.Error.Code.StartsWith("Validation")
-            ? BadRequest(result.Error)
-            : result.Error.Code.EndsWith("NotFound")
-                ? NotFound(result.Error)
-                : Conflict(result.Error);
+        return MapError(result.Error);
     }
 
     protected IActionResult HandleResult(Result result)
@@ -30,10 +26,15 @@ public abstract class BaseController : ControllerBase
         if (result.IsSuccess)
             return NoContent();
 
-        return result.Error.Code.StartsWith("Validation")
-            ? BadRequest(result.Error)
-            : result.Error.Code.EndsWith("NotFound")
-                ? NotFound(result.Error)
-                : Conflict(result.Error);
+        return MapError(result.Error);
     }
+
+    private IActionResult MapError(Error error) => error.Type switch
+    {
+        ErrorType.Validation   => BadRequest(error),
+        ErrorType.NotFound     => NotFound(error),
+        ErrorType.Unauthorized => Unauthorized(error),
+        ErrorType.Conflict     => Conflict(error),
+        _                      => StatusCode(500, error)
+    };
 }
