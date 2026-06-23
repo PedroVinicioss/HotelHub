@@ -8,4 +8,4 @@ public sealed record CreateUserCommand(
     string Email,
     string Password,
     UserRole Role
-) : IRequest<Guid>;
+) : ICommand<Guid>;
