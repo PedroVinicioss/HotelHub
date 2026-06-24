@@ -1,6 +1,5 @@
 using FluentMigrator.Runner;
 using HotelHub.Application.Abstractions;
-using HotelHub.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +18,6 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString));
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<HotelHubDbContext>());
-        services.AddScoped<IConversationRepository, ConversationRepository>();
 
         services
             .AddFluentMigratorCore()
