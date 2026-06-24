@@ -16,7 +16,7 @@ public sealed class RefreshToken : BaseEntity
     public User User { get; private set; } = null!;
 
     public bool IsExpired => DateTime.UtcNow >= ExpiresAt;
-    public bool IsActive => !IsRevoked && !IsExpired;
+    public bool IsValid => !IsRevoked && !IsExpired;
 
     public static RefreshToken Create(Guid userId, string token, string? ipAddress, int expiresInDays) =>
         new()
