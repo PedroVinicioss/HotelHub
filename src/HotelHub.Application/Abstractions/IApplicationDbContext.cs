@@ -15,6 +15,7 @@ public interface IApplicationDbContext
     DbSet<Message> Messages { get; }
     DbSet<Note> Notes { get; }
     DbSet<Booking> Bookings { get; }
+    DbSet<RefreshToken> RefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
