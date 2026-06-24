@@ -1,7 +1,9 @@
+using HotelHub.Api.Security;
 using HotelHub.Application.Commands.Login;
 using HotelHub.Application.Commands.RefreshToken;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HotelHub.Api.Controllers;
 
@@ -9,6 +11,7 @@ namespace HotelHub.Api.Controllers;
 public sealed class AuthController : BaseController
 {
     [AllowAnonymous]
+    [EnableRateLimiting(RateLimitPolicies.Auth)]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request, CancellationToken cancellationToken)
     {
@@ -26,6 +29,7 @@ public sealed class AuthController : BaseController
     }
 
     [AllowAnonymous]
+    [EnableRateLimiting(RateLimitPolicies.Auth)]
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
     {

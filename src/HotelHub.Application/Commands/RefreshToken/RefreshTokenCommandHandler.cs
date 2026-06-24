@@ -45,7 +45,7 @@ public sealed class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCom
                 rt => rt.Token == request.RefreshToken && rt.UserId == userId,
                 cancellationToken);
 
-        if (storedToken is null || !storedToken.IsActive)
+        if (storedToken is null || !storedToken.IsValid)
             return AuthErrors.InvalidRefreshToken;
 
         // Rotação: revoga o token atual e emite um novo
