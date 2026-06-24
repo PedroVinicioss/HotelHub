@@ -15,4 +15,7 @@ public static class UserErrors
 
     public static readonly Error InvalidCredentials =
         Error.Unauthorized("Credentials.Invalid", "E-mail ou senha inválidos.");
+
+    public static readonly Error NotInHotel =
+        Error.Unauthorized("User.NotInHotel", "Usuário não possui acesso a este hotel.");
 }
