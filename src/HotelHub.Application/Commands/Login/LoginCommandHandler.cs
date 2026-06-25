@@ -4,7 +4,6 @@ using HotelHub.Application.Security;
 using HotelHub.Application.Settings;
 using HotelHub.Domain.Abstraction;
 using HotelHub.Domain.Abstraction.ValueObject;
-using HotelHub.Domain.Entities;
 using RefreshTokenEntity = HotelHub.Domain.Entities.RefreshToken;
 using HotelHub.Domain.Errors;
 using Microsoft.EntityFrameworkCore;
