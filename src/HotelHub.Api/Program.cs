@@ -1,5 +1,6 @@
 using FluentMigrator.Runner;
 using HotelHub.Api.Extensions;
+using HotelHub.Api.Middleware;
 using HotelHub.Api.Security;
 using HotelHub.Application;
 using HotelHub.Infrastructure;
@@ -40,6 +41,9 @@ using (var scope = app.Services.CreateScope())
 
 if (app.Environment.IsDevelopment())
     app.MapOpenApi();
+
+// Captura exceções não tratadas antes de qualquer outro middleware
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 // Security headers em toda resposta
 app.UseMiddleware<SecurityHeadersMiddleware>();
